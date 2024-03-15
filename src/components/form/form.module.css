@@ -1,0 +1,56 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+
+  width: 100%;
+  max-width: 648px;
+}
+
+.icon {
+  width: 62px;
+  height: 62px;
+  background-image: url(../../public/images/svg/star.svg);
+  margin-bottom: 16px;
+}
+
+.text_box {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  text-align: center;
+
+  .text {
+    font-weight: 400;
+  }
+}
+
+.fieldset {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.input {
+  margin-bottom: 24px;
+}
+
+.input_error {
+  margin-bottom: 0;
+}
+
+.signin_box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 48px auto 80px;
+}
+
+.signin_box .signin_btn {
+  padding: 0;
+}

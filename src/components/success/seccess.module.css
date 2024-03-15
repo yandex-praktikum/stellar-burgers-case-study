@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 48px;
+  margin-bottom: 48px;
+}
+
+.text {
+  max-width: 420px;
+  text-align: center;
+}
+
+.image {
+  width: 100%;
+  max-width: 688px;
+  height: 344px;
+  object-fit: cover;
+  background-image: url(../../public/images/success.png);
+}
