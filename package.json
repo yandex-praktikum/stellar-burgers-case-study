@@ -6,7 +6,6 @@
   "scripts": {
     "start": "webpack serve --mode=development",
     "test": "jest",
-    "cypress": "./node_modules/.bin/cypress open",
     "test-ct": "playwright test -c playwright-ct.config.ts"
   },
   "devDependencies": {
