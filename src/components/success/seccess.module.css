@@ -17,5 +17,5 @@
   max-width: 688px;
   height: 344px;
   object-fit: cover;
-  background-image: url(../../public/images/success.png);
+  background-image: url('../../public/images/success.png');
 }

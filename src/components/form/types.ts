@@ -1,5 +1,5 @@
-import { Dispatch, HTMLProps, SetStateAction } from 'react';
+import type { Dispatch, HTMLProps, SetStateAction } from 'react';
 
-export interface IFormProps extends HTMLProps<HTMLFormElement> {
+export type IFormProps = {
   setMode: Dispatch<SetStateAction<'form' | 'complete'>>;
-}
+} & HTMLProps<HTMLFormElement>;

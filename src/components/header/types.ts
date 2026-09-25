@@ -1,3 +1,3 @@
-import { HTMLProps } from 'react';
+import type { HTMLProps } from 'react';
 
-export interface IHeaderProps extends HTMLProps<HTMLElement> {}
+export type IHeaderProps = {} & HTMLProps<HTMLElement>;

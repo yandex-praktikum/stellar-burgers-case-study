@@ -1,21 +1,18 @@
 import {
-  ChangeEventHandler,
-  FC,
-  FormEventHandler,
-  useRef,
-  useState
-} from 'react';
-import { IFormProps } from './types';
-
-import styles from './form.module.css';
-import clsx from 'clsx';
-import {
   Button,
   EmailInput,
   Input,
-  PasswordInput
-} from '@ya.praktikum/react-developer-burger-ui-components';
-import { namePattern } from '../../utils/constants';
+  PasswordInput,
+} from '@krgaa/react-developer-burger-ui-components';
+import { clsx } from 'clsx';
+import { useState } from 'react';
+
+import { namePattern } from '@utils/constants';
+
+import type { IFormProps } from './types';
+import type { ChangeEventHandler, FC, FormEventHandler } from 'react';
+
+import styles from './form.module.css';
 
 export const Form: FC<IFormProps> = ({ setMode, className }) => {
   const [nameValue, setNameValue] = useState('');
@@ -24,12 +21,15 @@ export const Form: FC<IFormProps> = ({ setMode, className }) => {
   const [passwordValue, setPasswordValue] = useState('');
   const [repeatPasswordValue, setRepeatPasswordValue] = useState('');
   const [repeatPasswordError, setIsRepeatPasswordError] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
 
-  const formRef = useRef<HTMLFormElement>(null);
+  // onChange всплывает от инпутов уже после обновления DOM,
+  // поэтому checkValidity() здесь видит актуальное состояние полей
+  const handleFormChange: FormEventHandler<HTMLFormElement> = ({ currentTarget }) => {
+    setIsFormValid(currentTarget.checkValidity());
+  };
 
-  const handleNameChange: ChangeEventHandler<HTMLInputElement> = ({
-    target
-  }) => {
+  const handleNameChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
     setNameValue(target.value);
     if (!namePattern.test(target.value)) {
       setNameError(true);
@@ -38,21 +38,17 @@ export const Form: FC<IFormProps> = ({ setMode, className }) => {
     }
   };
 
-  const handleEmailChange: ChangeEventHandler<HTMLInputElement> = ({
-    target
-  }) => {
+  const handleEmailChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
     setEmailValue(target.value);
   };
 
-  const handlePasswordChange: ChangeEventHandler<HTMLInputElement> = ({
-    target
-  }) => {
+  const handlePasswordChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
     setIsRepeatPasswordError(false);
     setPasswordValue(target.value);
   };
 
   const handleRepeatPasswordChange: ChangeEventHandler<HTMLInputElement> = ({
-    target
+    target,
   }) => {
     setIsRepeatPasswordError(false);
     setRepeatPasswordValue(target.value);
@@ -73,13 +69,13 @@ export const Form: FC<IFormProps> = ({ setMode, className }) => {
   return (
     <form
       className={clsx(styles.form, className)}
-      ref={formRef}
-      data-testid='form'
+      data-testid="form"
+      onChange={handleFormChange}
       onSubmit={handleSubmit}
     >
       <div className={styles.icon} />
       <div className={styles.text_box}>
-        <p className='text text_type_main-large'>Мы нуждаемся в вашей силе!</p>
+        <p className="text text_type_main-large">Мы нуждаемся в вашей силе!</p>
         <p className={clsx(styles.text, 'text text_type_main-medium')}>
           Зарегистрируйтесь на нашей платформе, чтобы присоединиться к списку
           контрибьюторов
@@ -96,7 +92,7 @@ export const Form: FC<IFormProps> = ({ setMode, className }) => {
           errorText={'Некорректный формат имени'}
           size={'default'}
           required
-          data-testid='name-input'
+          data-testid="name-input"
           extraClass={clsx(styles.input, { [styles.input_error]: nameError })}
         />
         <EmailInput
@@ -105,7 +101,7 @@ export const Form: FC<IFormProps> = ({ setMode, className }) => {
           name={'email'}
           isIcon={false}
           required
-          data-testid='email-input'
+          data-testid="email-input"
           extraClass={clsx(styles.input, { [styles.input_error]: false })}
         />
         <PasswordInput
@@ -113,42 +109,37 @@ export const Form: FC<IFormProps> = ({ setMode, className }) => {
           value={passwordValue}
           name={'password'}
           required
-          data-testid='password-input'
+          data-testid="password-input"
           extraClass={clsx(styles.input, { [styles.input_error]: false })}
         />
         <PasswordInput
           onChange={handleRepeatPasswordChange}
           value={repeatPasswordValue}
           name={'repeatPassword'}
-          placeholder='Повторите пароль'
+          placeholder="Повторите пароль"
           required
-          data-testid='repeat-password-input'
+          data-testid="repeat-password-input"
           extraClass={clsx(styles.input, {
-            [styles.input_error]: repeatPasswordError
+            [styles.input_error]: repeatPasswordError,
           })}
         />
         {repeatPasswordError && (
-          <p className='text input__error text_type_main-default mt-2 mb-2'>
+          <p className="text input__error text_type_main-default mt-2 mb-2">
             Пароли не совпадают
           </p>
         )}
-        <Button
-          htmlType='submit'
-          type='primary'
-          size='medium'
-          disabled={!formRef.current?.checkValidity()}
-        >
+        <Button htmlType="submit" type="primary" size="medium" disabled={!isFormValid}>
           Зарегистрироваться
         </Button>
       </fieldset>
       <div className={styles.signin_box}>
-        <p className='text text_type_main-default text_color_inactive'>
+        <p className="text text_type_main-default text_color_inactive">
           Уже зарегистрированы?
         </p>
         <Button
-          htmlType='button'
-          type='secondary'
-          size='medium'
+          htmlType="button"
+          type="secondary"
+          size="medium"
           extraClass={styles.signin_btn}
         >
           Войти

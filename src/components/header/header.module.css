@@ -1,13 +1,13 @@
 .header {
   display: flex;
   justify-content: center;
+  padding: 16px;
   background-color: var(--background);
   box-shadow:
-    0px 0px 1px 0px rgba(0, 0, 0, 0.04),
-    0px 4px 8px 0px rgba(0, 0, 0, 0.04),
-    0px 16px 24px 0px rgba(0, 0, 0, 0.04),
-    0px 24px 32px 0px rgba(0, 0, 0, 0.04);
-  padding: 16px;
+    0 0 1px 0 rgb(0 0 0 / 4%),
+    0 4px 8px 0 rgb(0 0 0 / 4%),
+    0 16px 24px 0 rgb(0 0 0 / 4%),
+    0 24px 32px 0 rgb(0 0 0 / 4%);
 }
 
 .content {
@@ -15,17 +15,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1280px;
   width: 100%;
+  max-width: 1280px;
   min-height: 56px;
 }
 
 .menu_list {
   display: flex;
   align-items: center;
-  list-style-type: none;
   gap: 48px;
   padding: 0;
+  list-style-type: none;
 }
 
 .menu_item {
@@ -33,7 +33,6 @@
   align-items: center;
   gap: 8px;
   cursor: pointer;
-
   transition: all 0.3s;
 }
 

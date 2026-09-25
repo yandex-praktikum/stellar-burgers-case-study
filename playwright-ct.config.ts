@@ -27,6 +27,11 @@ export default defineConfig({
 
     /* Port to use for Playwright component endpoint. */
     ctPort: 3100,
+
+    /* Resolve tsconfig path aliases (@utils, @components, ...) in mounted components. */
+    ctViteConfig: {
+      resolve: { tsconfigPaths: true },
+    },
   },
 
   /* Configure projects for major browsers */
