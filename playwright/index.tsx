@@ -1,2 +1,2 @@
-// Import styles, initialize component theme here.
-// import '../src/common.css';
+// Точка входа для компонентных тестов Playwright:
+// сюда подключаются глобальные стили и провайдеры, общие для всех mount()

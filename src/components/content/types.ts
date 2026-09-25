@@ -1,3 +1,3 @@
-import { HTMLProps } from 'react';
+import type { HTMLProps } from 'react';
 
-export interface IContentProps extends HTMLProps<HTMLElement> {}
+export type IContentProps = {} & HTMLProps<HTMLElement>;

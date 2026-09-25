@@ -3,7 +3,7 @@ import { Header } from '../header';
 
 import styles from './app.module.css';
 
-export function App() {
+export function App(): React.JSX.Element {
   return (
     <div>
       <Header />

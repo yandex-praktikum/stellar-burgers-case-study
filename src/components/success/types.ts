@@ -1,3 +1,3 @@
-import { HTMLProps } from 'react';
+import type { HTMLProps } from 'react';
 
-export interface ISuccessProps extends HTMLProps<HTMLElement> {}
+export type ISuccessProps = {} & HTMLProps<HTMLElement>;

@@ -1,5 +1,6 @@
-import { Content } from '.';
 import { test, expect } from '@playwright/experimental-ct-react';
+
+import { Content } from '.';
 
 test.describe('Form Testing', () => {
   test('should submit the form successfully', async ({ mount }) => {

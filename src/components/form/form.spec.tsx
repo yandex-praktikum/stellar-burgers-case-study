@@ -1,18 +1,16 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import renderer from 'react-test-renderer';
+import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { Form } from './index';
 
 describe('Form component', () => {
   it('Form snapshot', () => {
-    const component = renderer.create(<Form setMode={() => {}} />);
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    const { asFragment } = render(<Form setMode={jest.fn()} />);
+    expect(asFragment()).toMatchSnapshot();
   });
 
-  it('renders form and handles submit', () => {
+  it('renders form and handles submit', async () => {
+    const user = userEvent.setup();
     const setModeMock = jest.fn();
 
     render(<Form setMode={setModeMock} />);
@@ -20,10 +18,10 @@ describe('Form component', () => {
     const formElement = screen.getByTestId('form');
     expect(formElement).toBeTruthy();
 
-    userEvent.type(screen.getByTestId(/name-input/i), 'John Doe');
-    userEvent.type(screen.getByTestId(/email-input/i), 'test@example.com');
-    userEvent.type(screen.getByTestId('password-input'), 'password');
-    userEvent.type(screen.getByTestId(/repeat-password-input/i), 'password');
+    await user.type(screen.getByTestId(/name-input/i), 'John Doe');
+    await user.type(screen.getByTestId(/email-input/i), 'test@example.com');
+    await user.type(screen.getByTestId('password-input'), 'password');
+    await user.type(screen.getByTestId(/repeat-password-input/i), 'password');
 
     fireEvent.submit(formElement);
 
